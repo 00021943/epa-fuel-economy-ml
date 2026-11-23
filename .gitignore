@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Coursework brief and loose copies (not part of the project)
+*.pdf
+/vehicles.csv
+
+# Report drafts
+report/*.docx~
+~$*
+
+# Streamlit secrets
+.streamlit/secrets.toml
