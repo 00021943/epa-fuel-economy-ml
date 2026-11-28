@@ -85,7 +85,7 @@ Pages:
 - **Prediction**: enter a car and get its estimated MPG; if an identical car is already in the EPA data, its EPA value is shown.
 - **Evaluation**: test results of all models, errors by year and fuel technology, look-up comparison, feature importance.
 
-Deployed app: not deployed yet (the link will be added here).
+Deployed app: https://epa-fuel-economy-ml.streamlit.app
 
 ## License
 MIT — see `LICENSE`.
