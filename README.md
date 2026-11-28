@@ -17,11 +17,19 @@ Main steps (all in `notebooks/coursework.ipynb`):
   (Random Forest) is chosen with a check on 2021–2023, before the test set is used.
 
 ## How this work differs from existing Kaggle notebooks
-Kaggle has older copies of this data (EPA version 1984–2017). The notebook used for comparison,
-https://www.kaggle.com/code/ffaraz/predictive-modeling-for-mpg-estimation, mixes electric and
-combustion-engine cars, splits the data randomly, uses 4 features (no engine size) and reports only R².
-This project uses the official 2026 release, only combustion-engine cars, 13 features, a time-based
-split and MAE, RMSE and R². Details are in the first cell of the notebook.
+Kaggle has an older copy of this data (EPA, 1984–2017) with 19 public notebooks
+(https://www.kaggle.com/datasets/epa/fuel-economy/code). Most of them only explore the data; three fit a model:
+- [Predictive Modeling for MPG Estimation](https://www.kaggle.com/code/ffaraz/predictive-modeling-for-mpg-estimation):
+  mixes electric and combustion-engine cars, random split, 4 features (no engine size), R² only.
+- [2007 and 2008 FE using SimpleReg & MARS](https://www.kaggle.com/code/aissas/2007-and-2008-fe-using-simplereg-mars):
+  trains on 2007 and tests on 199 cars from 2008, with one feature (engine size).
+- [Fuel Economy Economy Analysis](https://www.kaggle.com/code/nnennaifeanyi/fuel-economy-economy-analysis):
+  R linear regressions for annual fuel cost and the fuel economy score, R² on the training data only.
+
+This project uses the official 2026 release, only combustion-engine cars, 13 features, a test set of four
+future model years, cross-validation grouped by base model, three tuned models against two baselines
+(mean and a look-up of the same car) and MAE, RMSE and R² for every model. Details are in the first cell
+of the notebook.
 
 ## Dataset
 US EPA and U.S. Department of Energy fuel economy data, downloaded from
@@ -38,7 +46,8 @@ Column documentation: https://www.fueleconomy.gov/feg/ws/index.shtml
 data/raw/          original dataset (not modified)
 notebooks/         Jupyter notebook with the full analysis
 app/               Streamlit multi-page application
-models/            final_model.joblib, the final Random Forest pipeline saved by the notebook (section D.7)
+models/            final_model.joblib, the final Random Forest pipeline used by the app, refitted on all
+                   years 1984–2027 (section E.8); the test results are for the same model trained on 1984–2023
 pyproject.toml     dependencies
 uv.lock            locked dependency versions
 requirements.txt   dependencies for pip users
