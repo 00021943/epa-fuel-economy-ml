@@ -45,9 +45,10 @@ Column documentation: https://www.fueleconomy.gov/feg/ws/index.shtml
 ```
 data/raw/          original dataset (not modified)
 notebooks/         Jupyter notebook with the full analysis
-app/               Streamlit multi-page application
+app/               Streamlit multi-page application (Home.py, pages/, utils.py)
 models/            final_model.joblib, the final Random Forest pipeline used by the app, refitted on all
                    years 1984–2027 (section E.8); the test results are for the same model trained on 1984–2023
+                   evaluation.json, the result tables of sections D and E, shown in the app
 pyproject.toml     dependencies
 uv.lock            locked dependency versions
 requirements.txt   dependencies for pip users
@@ -70,12 +71,20 @@ pip install -r requirements.txt
 uv run jupyter notebook notebooks/coursework.ipynb
 ```
 Run all cells from top to bottom (about 5 minutes, most of it is the model tuning in section D).
-The notebook reads the data from `../data/raw/` and writes the final model to `../models/`.
+The notebook reads the data from `../data/raw/` and writes the final model and `evaluation.json` to `../models/`,
+so it must be run with `notebooks/` as the working directory (Jupyter does this automatically).
 
 ## Run the app
 ```bash
 uv run streamlit run app/Home.py
 ```
+Pages:
+- **Data Exploration**: dashboard with filters (years, fuel technology, vehicle type, make), key numbers, charts and a CSV download.
+- **Preprocessing**: rows after each cleaning step, data corrections, missing values, leakage columns, engineered features.
+- **Model Training**: the models, cross-validation and tuning results, the 2021–2023 check, and a form to train a model yourself.
+- **Prediction**: enter a car and get its estimated MPG; if an identical car is already in the EPA data, its EPA value is shown.
+- **Evaluation**: test results of all models, errors by year and fuel technology, look-up comparison, feature importance.
+
 Deployed app: not deployed yet (the link will be added here).
 
 ## License
